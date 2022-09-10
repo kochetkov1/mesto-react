@@ -34,7 +34,6 @@ function App() {
     setSelectedCard({name: '', link: ''});
   }
 
-
   return (
     <div className="App">
 
@@ -54,6 +53,7 @@ function App() {
         <PopupWithForm
           title={'Редактировать профиль'}
           name={'profile'}
+          buttonText={'Сохранить'}
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           children={
@@ -72,6 +72,7 @@ function App() {
         <PopupWithForm
           title={'Новое место'}
           name={'card'}
+          buttonText={'Cоздать'}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           children={
@@ -89,6 +90,7 @@ function App() {
         <PopupWithForm
           title={'Обновить аватар'}
           name={'avatar'}
+          buttonText={'Сохранить'}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           children={
