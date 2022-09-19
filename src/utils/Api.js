@@ -32,7 +32,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: userInfo.name,
-        about: userInfo.description
+        about: userInfo.about
       })
     })
       .then(this._handleServerResponse);
@@ -61,22 +61,14 @@ class Api {
     return this._deletedCard;
   }
 
-  addLike(id) {
-    this._addedLike = fetch(`${this._url}/cards/${id}/likes`, {
-      method: 'PUT',
+  // Смена состояния лайка
+  changeLikeCardStatus(id, isLiked) {
+    this._updateLike = fetch(`${this._url}/cards/${id}/likes`, {
+      method: isLiked ? "PUT" : "DELETE",
       headers: this._headers,
     })
       .then(this._handleServerResponse);
-    return this._addedLike;
-  }
-
-  deleteLike(id) {
-    this._deletedLike = fetch(`${this._url}/cards/${id}/likes`, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-      .then(this._handleServerResponse);
-    return this._deletedLike;
+    return this._updateLike;
   }
 
   updateAvatar(url) {

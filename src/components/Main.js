@@ -1,6 +1,6 @@
-import api from '../utils/Api'
 import React from 'react'
 import Card from './Card'
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
 
@@ -9,24 +9,12 @@ function Main(props) {
     onAddPlace,
     onEditAvatar,
     onCardClick,
+    onCardLike,
+    onCardDelete,
+    cards
   } = props;
 
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    Promise.all([api.getUserProfile(), api.getInitialCards()])
-      .then(([data, initialCards]) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-        setCards(initialCards);
-      })
-      .catch((err) => { console.log(err) })
-  }, [])
+  const currentUser = React.useContext(CurrentUserContext);
 
   return (
 
@@ -35,15 +23,15 @@ function Main(props) {
       <section className="profile">
 
         <button className="profile__photo-edit-button" onClick={onEditAvatar} >
-          <img className="profile__photo" src={userAvatar} alt="Фотография профиля" />
+          <img className="profile__photo" src={currentUser.avatar} alt="Фотография профиля" />
           <div className="profile__photo-shadow"></div>
         </button>
         <div className="profile__name-block">
           <div className="profile__name-button-box">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button className="profile__edit-button" type="button" onClick={onEditProfile}></button>
           </div>
-          <p className="profile__description">{userDescription}</p>
+          <p className="profile__description">{currentUser.about}</p>
         </div>
         <button className="profile__add-button" type="button" onClick={onAddPlace}></button>
 
@@ -55,7 +43,9 @@ function Main(props) {
           <Card
             key={card._id}
             card={card}
-            onClick={onCardClick}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
 

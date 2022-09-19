@@ -5,9 +5,7 @@ function ImagePopup(props) {
     card
   } = props;
 
-
   return (
-
   <div className={`popup popup-pic popup_type_img ${card.link ? 'popup_opened' : ''}`}  id="popup-pic">
   <div className="popup-pic__container">
     <img className="popup-pic__image" src={card.link} alt={card.name}/>
@@ -16,7 +14,6 @@ function ImagePopup(props) {
       name="popup__close-button-image" onClick={onClose}></button>
   </div>
 </div>
-
   );
 }
 
