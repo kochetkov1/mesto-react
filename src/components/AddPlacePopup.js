@@ -1,16 +1,11 @@
-import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import React from "react";
+import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup(props) {
+  const { isOpen, onClose, onAddPlace } = props;
 
-  const {
-    isOpen,
-    onClose,
-    onAddPlace
-  } = props;
-
-  const [title, setTitle] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [title, setTitle] = React.useState("");
+  const [link, setLink] = React.useState("");
 
   // Обработчик изменения инпута обновляет стейт
   function handleChangeTitle(e) {
@@ -28,35 +23,52 @@ function AddPlacePopup(props) {
     // Передаём значения управляемых компонентов во внешний обработчик
     onAddPlace({
       name: title,
-      link: link
+      link: link,
     });
   }
 
   React.useEffect(() => {
-    setTitle('');
-    setLink('');
+    setTitle("");
+    setLink("");
   }, [isOpen]);
 
   return (
     <PopupWithForm
-      title={'Новое место'}
-      name={'card'}
-      buttonText={'Cоздать'}
+      title={"Новое место"}
+      name={"card"}
+      buttonText={"Cоздать"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       children={
         <>
-          <input type="text" className="popup__input popup__input-name" id="name-card-input" name="name"
-            placeholder="Название" required minLength="2" maxLength="30" value={title} onChange={handleChangeTitle} />
+          <input
+            type="text"
+            className="popup__input popup__input-name"
+            id="name-card-input"
+            name="name"
+            placeholder="Название"
+            required
+            minLength="2"
+            maxLength="30"
+            value={title}
+            onChange={handleChangeTitle}
+          />
           <span className="name-card-input-error popup__input-error"></span>
-          <input type="url" className="popup__input popup__input-description" id="url-card-input" name="link"
-            placeholder="Ссылка" required value={link} onChange={handleChangeLink} />
+          <input
+            type="url"
+            className="popup__input popup__input-description"
+            id="url-card-input"
+            name="link"
+            placeholder="Ссылка"
+            required
+            value={link}
+            onChange={handleChangeLink}
+          />
           <span className="url-card-input-error popup__input-error"></span>
         </>
       }
     />
-
   );
 }
 
