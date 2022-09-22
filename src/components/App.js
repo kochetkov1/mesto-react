@@ -71,11 +71,11 @@ function App() {
   }
 
   function handleAddPlaceClick() {
-    setIsAddPlacePopupOpen({ isAddPlacePopupOpen: !isAddPlacePopupOpen });
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
   }
 
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen({ isEditAvatarPopupOpen: !isEditAvatarPopupOpen });
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
   function handleCardClick(selectedCard) {
